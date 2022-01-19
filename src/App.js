@@ -1,25 +1,88 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import './main.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class Input extends Component {
+  constructor(props){
+    super(props);
+
+    this.state = { value: ""}
+
+    this.handleInput = this.handleInput.bind(this);
+  }
+
+  handleInput (e) {
+    this.setState({
+      value: e.target.value
+    })
+  }
+
+  componentDidMount() {
+    console.log('componentDidMount');
+  }
+
+  componentWillUnmount() {
+    console.log('componentWillUnmount');
+  }
+  
+  render() {
+    return (
+      <div className={this.props.className}>
+        <label className='label' 
+        htmlFor={this.props.id}>{this.props.title}:</label>
+
+        <input 
+          id={this.props.id} 
+          name={this.props.nome} 
+          value={this.props.value}
+          onChange={this.handleInput}
+          type="text"/>
+
+      </div>
+    )
+  }
+}
+
+
+class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = { value: ""}
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeA = this.handleChangeA.bind(this);
+  }
+
+  handleChange (e) {
+    this.setState({
+      value: "C"
+    })
+  }  
+  handleChangeA (e) {
+    this.setState({
+      value: "A"
+    })
+  }  
+
+
+  render() {
+    return (
+      <div className='container'>
+        <form tag="formulario" className='formulario'>
+          <fieldset>
+            <Input title="Nome" id="nome" value={this.state.value} nome="nome" className="input" />
+            <Input title="Endereço" id="endereco" className="input"/>
+            
+            <div className='button-container'>
+              <button type="button" onClick={this.handleChange}>C</button>
+              <button type="button" onClick={this.handleChangeA}>A</button>
+            </div>
+
+          </fieldset>
+        </form>
+      </div>
+    );
+  }
+
 }
 
 export default App;
