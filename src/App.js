@@ -52,6 +52,7 @@ class App extends Component {
     this.handleChangeA = this.handleChangeA.bind(this);
   }
 
+  
   handleChange (e) {
     this.setState({
       value: "C"
